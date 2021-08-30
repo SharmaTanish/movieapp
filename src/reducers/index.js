@@ -1,7 +1,7 @@
 const initialMoviesState = {
     list:[],
     favourites:[],
-    showFavourites : false
+    showFavourites : false,
 }
 export function movies (state =initialMoviesState,action){
     if(action.type ==='ADD_MOVIES'){
@@ -32,19 +32,24 @@ export function movies (state =initialMoviesState,action){
             showFavourites :action.val
         }
     }
-    else if(action.type ==='HANDLE_MOVIE_SEARCH'){
+    else if(action.type ==='HANDLE_MOVIE_SEARCH'){   //SINCE BY DOING LIKE THIS ,I.E., DIRECTLY ,WE DON'T HAVE FUNCTION OF FUNCTION ,I.E., FUNCTION RETURNING A FUNCTION BUT IN THUNK WE USE CURRYING , THEREFORE TO USE THUNK WE SHOLUD MAKE ACTION AND REDUCERS SEPARATE ONLY BY USING FUCTIONS AS DONE IN CODEIAL, IF DO LIKE THIS ONLY THEN THUNK ACTION CAN NEVER BE FUNCTION BUT REMAIN OBJECT ONLY, THEREFORE ERRORS COME! 
         
         const url = `http://www.omdbapi.com/?apikey=3ca5df7&t=${action.searchText}`;
-
+                   
+        return function(dispatch){
         fetch(url)
         .then(response => response.json())
         .then(movie => {
             console.log(movie);
+          // Now dispatch an action
+          
         })
 
-        // Now dispatch an action and required thunk middleware
+    }
+
     }
     return state;
+    
 }
 
 
