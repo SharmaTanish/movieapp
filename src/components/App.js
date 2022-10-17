@@ -34,6 +34,12 @@ class App extends React.Component{
   }
  
   onChangeTab = (val) => {
+    // if(this.props.store.getState().movies.list==null){
+    //   this.props.store.dispatch({
+    //     type : 'ADD_MOVIES',
+    //     movies : data
+    //   });
+    // }
     this.props.store.dispatch({type:'SET_SHOW_FAVOURITES', val})
   }
 
@@ -54,11 +60,15 @@ class App extends React.Component{
         </div>
 
         <div className="list" >
-   
-          {displayMovies.map((movie,index) => (
+        
+          
+            {displayMovies ? displayMovies.map((movie,index) => (
 
-               <MovieCard movie={movie} key={`movie-${index}`} dispatch = {this.props.store.dispatch} isFavourite={this.isMovieFavourite(movie)} /> // HERE MUST WRITE RETURN KEYWORD but for single line we need to write return in fat arrow function? !!!!!!!!!!!!!!!!!!!!
-          ))}
+                <MovieCard movie={movie} key={`movie-${index}`} dispatch = {this.props.store.dispatch} isFavourite={this.isMovieFavourite(movie)} /> // HERE MUST WRITE RETURN KEYWORD but for single line we need to write return in fat arrow function? !!!!!!!!!!!!!!!!!!!!
+            )) : null}
+          
+          
+        
         </div>
 
       </div>
